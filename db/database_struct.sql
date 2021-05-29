@@ -1,0 +1,29 @@
+CREATE TABLE bus_insertion (
+    time_detection TIMESTAMP WITHOUT TIME ZONE,
+    bus_id VARCHAR(10),
+    latitude FLOAT,
+    longitude FLOAT,
+    line_reported VARCHAR (8),
+    line_detected VARCHAR (8)
+);
+
+CREATE TABLE bus_data (
+    time_detection TIMESTAMP WITHOUT TIME ZONE,
+    bus_id VARCHAR(10),
+    latitude FLOAT,
+    longitude FLOAT,
+    line_reported VARCHAR (8),
+    line_detected VARCHAR (8)
+    
+) PARTITION BY RANGE(time_detection);
+
+CREATE TABLE line_data (
+    line_id VARCHAR(8),
+    direction CHAR(1),
+    position SMALLINT,
+    latitude FLOAT,
+    longitude FLOAT
+);
+
+CREATE TABLE bus_data_2021_05 PARTITION OF bus_data FOR VALUES FROM ('2021-05-01') TO ('2021-06-01');
+CREATE TABLE bus_data_2021_04 PARTITION OF bus_data FOR VALUES FROM ('2021-04-01') TO ('2021-05-01');

@@ -24,6 +24,3 @@ CREATE TABLE line_data (
     latitude FLOAT,
     longitude FLOAT
 );
-
-CREATE TABLE bus_data_2021_05 PARTITION OF bus_data FOR VALUES FROM ('2021-05-01') TO ('2021-06-01');
-CREATE TABLE bus_data_2021_04 PARTITION OF bus_data FOR VALUES FROM ('2021-04-01') TO ('2021-05-01');

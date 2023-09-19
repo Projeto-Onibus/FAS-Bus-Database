@@ -1,15 +1,19 @@
 services:
     # SQL server for structured data
     psql:
-        image: timescale/timescaledb:latest-pg13
+        build: .
         environment:
             POSTGRES_PASSWORD_FILE: /run/secrets/psql_password
-    
+        secrets:
+            - psql_password
     # NoSQL server for unstructured data
     mongodb:
         image: mongo:latest
         environment:
-            MONGO_INITDB_ROOT_PASSWORD_FILE=/run/secrets/mongo_password
+            MONGO_INITDB_ROOT_USER: admin
+            MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongo_password
+        secrets:
+            - mongo_password
 
     # Redis as a cache
     redis:
@@ -17,6 +21,6 @@ services:
 
 secrets:
     psql_password:
-        file: ./secrets/psql_password
+        file: secrets/psql_password
     mongo_password:
-        file: ./secrets/mongo_password
+        file: secrets/mongo_password

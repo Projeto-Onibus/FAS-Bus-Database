@@ -1,1 +1,0 @@
- secrets/mongo_password
